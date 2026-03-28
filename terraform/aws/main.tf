@@ -169,7 +169,7 @@ resource "aws_eks_cluster" "main" {
 ########################################################
 
 resource "aws_eks_node_group" "default" {
-  cluster_name    = aws_eks_cluster.main.name
+  cluster_name = aws_eks_cluster.main.name
   instance_types = [
     "t3.medium",
     "t3a.medium"
