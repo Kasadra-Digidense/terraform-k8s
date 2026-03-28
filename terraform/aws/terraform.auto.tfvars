@@ -4,7 +4,7 @@ node_group_name    = "dev-node-group"
 
 desired_size = 2
 max_size     = 3
-min_size     = 1
+min_size     = 2
 
 pillar_name     = "devops"
 customer_name   = "acme"
