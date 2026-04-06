@@ -277,3 +277,17 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority[0].data)
   token                  = data.aws_eks_cluster_auth.cluster.token
 }
+
+resource "aws_ecr_repository" "webapp" {
+  name = "webapp"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+
+  image_tag_mutability = "MUTABLE"
+
+  tags = {
+    Name = "webapp-ecr"
+  }
+}
