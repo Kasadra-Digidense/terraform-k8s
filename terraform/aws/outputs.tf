@@ -16,3 +16,8 @@ output "cluster_version" {
 output "node_group_name" {
   value = aws_eks_node_group.default.node_group_name
 }
+
+output "ecr_repository_url" {
+  description = "ECR Repository URL"
+  value       = aws_ecr_repository.webapp.repository_url
+}
