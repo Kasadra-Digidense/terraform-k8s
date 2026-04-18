@@ -376,4 +376,16 @@ resource "aws_eks_addon" "ebs_csi" {
   depends_on = [
     aws_iam_role_policy_attachment.ebs_attach
   ]
+resource "aws_ecr_repository" "webapp" {
+  name = "webapp"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+
+  image_tag_mutability = "MUTABLE"
+
+  tags = {
+    Name = "webapp-ecr"
+  }
 }
