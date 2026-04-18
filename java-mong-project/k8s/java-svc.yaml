@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-service
+  namespace: project-a
+spec:
+  type: ClusterIP
+  ports:
+    - name: webport
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+  selector:
+    app: javaapp
+    environment: dev
