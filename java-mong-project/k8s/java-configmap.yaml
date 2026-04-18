@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: java-db-connection-config
+  namespace: project-a
+data:
+  MONGO_URL: "mongodb://mongo-0.mongo,mongo-1.mongo:27017/dev?replicaSet=rs0"
+
+
+  helm install digi-dev oci://ghcr.io/nginx/charts/nginx-ingress --version 2.5.1
+

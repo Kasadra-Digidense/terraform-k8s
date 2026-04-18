@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app
+  labels:
+    app: java
+    environment: dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: java
+      environment: dev
+  template:
+    metadata:
+      labels:
+        app: java
+        environment: dev
+    spec:
+      containers:
+        - name: appcon
+          image: 017341176608.dkr.ecr.us-east-1.amazonaws.com/java:latest
+          imagePullPolicy: Always
+          env:
+            - name: MONGO_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: java-config
+                  key: MONGO_URL
+          ports:
+            - containerPort: 8080
+              name: appport
+              protocol: TCP
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: java-config
+data:
+  MONGO_URL: "mongodb://mongo-0.mongo,mongo-1.mongo:27017/dev?replicaSet=rs0"
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-service
+spec:
+  type: ClusterIP
+  ports:
+    - name: appport
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+  selector:
+    app: java
+    environment: dev
